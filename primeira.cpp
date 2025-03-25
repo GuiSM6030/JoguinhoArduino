@@ -12,3 +12,9 @@ LiquidCrystal lcd(9, 11, 10, 12, 13, A0);
 
 int funkyTown[] = {262, 330, 392, 262, 392, 330, 262};
 int botaoNotas[] = {262, 330, 392, 523};
+
+void tocarNota(int nota) {
+    tone(BUZZER, nota, 300);
+    delay(400);
+    noTone(BUZZER);
+}
