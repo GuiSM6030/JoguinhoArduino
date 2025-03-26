@@ -21,6 +21,20 @@ https://www.tinkercad.com/things/eyncHt5v4gf-projeto?sharecode=Lg4YuK6g56w4HUB9L
 > 
 _Próximos passos à seguir_
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-### Guilherme Silva Meireles RA: 22.123.094-9
-### Natasha Almeida Trindade RA: 22.123.098-0
+### Projeto realizado por:
+> Guilherme Silva Meireles RA: 22.123.094-9
+> 
+> Natasha Almeida Trindade RA: 22.123.098-0
