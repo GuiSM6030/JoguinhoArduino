@@ -21,3 +21,9 @@ void setup() {
     pinMode(BOTAO3, INPUT_PULLUP);
     pinMode(BOTAO4, INPUT_PULLUP);
 }
+
+// Array com a sequência da música "Funky Town"
+int funkyTown[] = {262, 330, 392, 262, 392, 330, 262};
+
+// Notas correspondentes a cada botão
+int botaoNotas[] = {262, 330, 392, 523};
