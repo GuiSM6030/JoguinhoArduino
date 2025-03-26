@@ -20,6 +20,11 @@ void setup() {
     pinMode(BOTAO2, INPUT_PULLUP);
     pinMode(BOTAO3, INPUT_PULLUP);
     pinMode(BOTAO4, INPUT_PULLUP);
+
+    lcd.begin(16, 2);
+    lcd.print("Pressione um");
+    lcd.setCursor(0, 1);
+    lcd.print("botao para comecar");
 }
 
 // Array com a sequência da música "Funky Town"
@@ -27,3 +32,7 @@ int funkyTown[] = {262, 330, 392, 262, 392, 330, 262};
 
 // Notas correspondentes a cada botão
 int botaoNotas[] = {262, 330, 392, 523};
+
+LiquidCrystal lcd(9, 11, 10, 12, 13, A0);
+
+
