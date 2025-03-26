@@ -88,4 +88,60 @@ bool verificarSequencia(int nivel) {
     return true;
 }
 
+void loop() {
+    // Inicia o jogo ao pressionar qualquer botão
+    if (digitalRead(BOTAO1) == LOW || digitalRead(BOTAO2) == LOW || 
+        digitalRead(BOTAO3) == LOW || digitalRead(BOTAO4) == LOW) {
+        
+        int nivel = 3; // Nível inicial
+        bool ganhou = true;
+
+        while (ganhou && nivel <= 7) {
+            // Mostra o nível atual
+            lcd.clear();
+            lcd.print("Nivel: ");
+            lcd.print(nivel);
+            delay(1000);
+
+            // Toca a sequência para memorização
+            for (int i = 0; i < nivel; i++) {
+                tocarNota(funkyTown[i]);
+                delay(500);
+            }
+
+            lcd.clear();
+            lcd.print("Sua vez!");
+
+            // Verifica a resposta do jogador
+            if (!verificarSequencia(nivel)) {
+                ganhou = false;
+                lcd.clear();
+                lcd.print("Errou! Fim do jogo");
+                digitalWrite(LED_VERMELHO, HIGH);
+                delay(2000);
+                digitalWrite(LED_VERMELHO, LOW);
+            } else {
+                lcd.clear();
+                lcd.print("Correto!");
+                digitalWrite(LED_VERDE, HIGH);
+                delay(1000);
+                digitalWrite(LED_VERDE, LOW);
+                nivel++;
+            }
+        }
+
+        // Mensagem de vitória
+        if (ganhou) {
+            lcd.clear();
+            lcd.print("Parabens! Venceu!");
+            delay(2000);
+        }
+        
+        // Reinicia o jogo
+        lcd.clear();
+        lcd.print("Pressione um");
+        lcd.setCursor(0, 1);
+        lcd.print("botao para jogar");
+    }
+}
 
