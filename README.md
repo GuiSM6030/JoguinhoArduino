@@ -20,3 +20,7 @@ https://www.tinkercad.com/things/eyncHt5v4gf-projeto?sharecode=Lg4YuK6g56w4HUB9L
 > 24 à 26/03 - _Princípio dos códigos, e testes (Código sendo testado em link de teste do TinkerCad)_
 > 
 _Próximos passos à seguir_
+
+
+### Guilherme Silva Meireles RA: 22.123.094-9
+### Natasha Almeida Trindade RA: 22.123.098-0
