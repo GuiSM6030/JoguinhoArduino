@@ -11,3 +11,9 @@ https://www.tinkercad.com/things/eyncHt5v4gf-projeto?sharecode=Lg4YuK6g56w4HUB9L
 - LED (Vermelho e Verde);
 - Potenciômetro;
 - Piezo 1x;
+
+# Fluxo
+19/03 - _Início e criação do projeto no GitHub_
+22/03 - _Primeiros passos com TinkerCad e adição dele ao Git_
+24 à 26/03 - _Princípio dos códigos, e testes (Código sendo testado em link de teste do TinkerCad)_ 
+_Próximos passos à seguir_
