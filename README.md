@@ -19,19 +19,14 @@ https://www.tinkercad.com/things/eyncHt5v4gf-projeto?sharecode=Lg4YuK6g56w4HUB9L
 > 
 > 24 à 26/03 - _Princípio dos códigos, e testes (Código sendo testado em link de teste do TinkerCad)_
 > 
-_Próximos passos à seguir_
+> 31 à 2/04 - _Ajeitando as notas musicais, luzes de vencer e perder e mecanicas do menu (Código sendo testado em link de teste do TinkerCad)_
+>
+> 02/04 - _Reta final, ultimos ajustes, em notas musicais, luzes de notas adicionadas_
+> _Apresentação do projeto final_
+<br>
+<br>
+<br>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 
 ### Projeto realizado por:
