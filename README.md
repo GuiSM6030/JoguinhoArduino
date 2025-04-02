@@ -8,7 +8,7 @@ https://www.tinkercad.com/things/eyncHt5v4gf-projeto?sharecode=Lg4YuK6g56w4HUB9L
 - Arduíno;
 - Botão 4x;
 - Resistor 4x;
-- LED (Vermelho e Verde);
+- LED (Vermelho, Verde, Azul e amarelo);
 - Potenciômetro;
 - Piezo 1x;
 
