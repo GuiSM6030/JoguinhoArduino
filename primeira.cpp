@@ -55,3 +55,30 @@ int nivelAtual = 1;
 int sequencia[12]; 
 int indiceSequencia = 0;
 bool emJogo = false;
+
+void setup() {
+  pinMode(BUZZER, OUTPUT);
+  pinMode(LED_VERDE, OUTPUT);
+  pinMode(LED_VERMELHO, OUTPUT);
+  
+  pinMode(LED_BOTAO1, OUTPUT);
+  pinMode(LED_BOTAO2, OUTPUT);
+  
+  pinMode(BOTAO1, INPUT_PULLUP);
+  pinMode(BOTAO2, INPUT_PULLUP);
+  pinMode(BOTAO3, INPUT_PULLUP);
+  pinMode(BOTAO4, INPUT_PULLUP);
+  
+  lcd.begin(16, 2);
+  randomSeed(analogRead(A3));
+ 
+  lcd.print("Pressione um");
+  lcd.setCursor(0, 1);
+  lcd.print("botao p/ comecar");
+  
+  while(digitalRead(BOTAO1) && digitalRead(BOTAO2) && digitalRead(BOTAO3) && digitalRead(BOTAO4)) {
+    delay(100);
+  }
+  
+  menuSelecaoMusica();
+}
