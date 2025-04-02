@@ -121,3 +121,42 @@ void acenderLedDaNota(int nota) {
   }
 }
 
+void apagarLedsBotoes() {
+  digitalWrite(LED_BOTAO1, LOW);
+  digitalWrite(LED_BOTAO2, LOW);
+  digitalWrite(LED_VERMELHO, LOW);
+  digitalWrite(LED_VERDE, LOW);
+}
+
+void menuSelecaoMusica() {
+  emJogo = false;
+  while(true) {
+    lcd.clear();
+    lcd.print("Escolha a musica:");
+    lcd.setCursor(0, 1);
+    lcd.print(musicas[musicaSelecionada].nome);
+    
+    while(true) {
+      if(!digitalRead(BOTAO1)) {
+        musicaSelecionada = (musicaSelecionada - 1 + NUM_MUSICAS) % NUM_MUSICAS;
+        delay(200);
+        break;
+      }
+      if(!digitalRead(BOTAO2)) {
+        musicaSelecionada = (musicaSelecionada + 1) % NUM_MUSICAS;
+        delay(200);
+        break;
+      }
+      if(!digitalRead(BOTAO3)) {
+        delay(200);
+        lcd.clear();
+        lcd.print("Tocando musica...");
+        tocarMusicaCompleta();
+        iniciarJogo();
+        return;
+      }
+      delay(50);
+    }
+  }
+}
+
