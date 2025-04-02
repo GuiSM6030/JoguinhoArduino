@@ -217,4 +217,61 @@ void tocarSequencia(int tamanho) {
     apagarLedsBotoes();
   }
 }
+bool verificarResposta(int tamanho) {
+  lcd.clear();
+  lcd.print("Repita a");
+  lcd.setCursor(0, 1);
+  lcd.print("sequencia!");
+  delay(1000);
+  
+  indiceSequencia = 0;
+  
+  while(indiceSequencia < tamanho) {
+    int botaoPressionado = -1;
+    
+    while(botaoPressionado == -1) {
+      if(!digitalRead(BOTAO1)) {
+        botaoPressionado = 0;
+        digitalWrite(LED_BOTAO1, HIGH);
+      }
+      else if(!digitalRead(BOTAO2)) {
+        botaoPressionado = 1;
+        digitalWrite(LED_BOTAO2, HIGH);
+      }
+      else if(!digitalRead(BOTAO3)) {
+        botaoPressionado = 2;
+        digitalWrite(LED_VERMELHO, HIGH);
+      }
+      else if(!digitalRead(BOTAO4)) {
+        botaoPressionado = 3;
+        digitalWrite(LED_VERDE, HIGH);
+      }
+      delay(50);
+    }
+    
+    int nota;
+    switch(botaoPressionado) {
+      case 0: nota = NOTA_E4; break;
+      case 1: nota = NOTA_A4; break;
+      case 2: nota = NOTA_Cs5; break;
+      case 3: nota = NOTA_E5; break;
+    }
+    
+    int duracao = 200;
+    tone(BUZZER, nota, duracao);
+    delay(duracao);
+    noTone(BUZZER);
+    apagarLedsBotoes();
+    
+    int notaEsperada = musicas[musicaSelecionada].notas[sequencia[indiceSequencia]];
+    if(nota != notaEsperada) {
+      return false;
+    }
+    
+    indiceSequencia++;
+    delay(100);
+  }
+  
+  return true;
+}
 
