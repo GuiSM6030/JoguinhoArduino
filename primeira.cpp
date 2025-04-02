@@ -159,4 +159,62 @@ void menuSelecaoMusica() {
     }
   }
 }
+void iniciarJogo() {
+  nivelAtual = 1;
+  emJogo = true;
+
+  for(int i = 0; i < musicas[musicaSelecionada].tamanho; i++) {
+    sequencia[i] = i; 
+  }
+  
+  while(nivelAtual <= musicas[musicaSelecionada].niveis) {
+    lcd.clear();
+    lcd.print("Nivel ");
+    lcd.print(nivelAtual);
+    lcd.print("/");
+    lcd.print(musicas[musicaSelecionada].niveis);
+    lcd.setCursor(0, 1);
+    lcd.print("Prestem atencao!");
+    delay(1000);
+
+    tocarSequencia(nivelAtual);
+
+    if(!verificarResposta(nivelAtual)) {
+      lcd.clear();
+      lcd.print("Voce errou!");
+      piscarLed(LED_VERMELHO, 3);
+      delay(1000);
+      menuSelecaoMusica();
+      return;
+    }
+    
+    lcd.clear();
+    lcd.print("Correto!");
+    piscarLed(LED_VERDE, 3);
+    nivelAtual++;
+    delay(1000);
+  }
+  
+  lcd.clear();
+  lcd.print("Parabens, voce");
+  lcd.setCursor(0, 1);
+  lcd.print("venceu!");
+  piscarLed(LED_VERDE, 5);
+  delay(3000);
+  menuSelecaoMusica();
+}
+
+void tocarSequencia(int tamanho) {
+  for(int i = 0; i < tamanho; i++) {
+    int notaIndex = sequencia[i];
+    int nota = musicas[musicaSelecionada].notas[notaIndex];
+    int duracao = 1000 / musicas[musicaSelecionada].duracoes[notaIndex];
+    
+    acenderLedDaNota(nota);
+    tone(BUZZER, nota, duracao);
+    delay(duracao + 50);
+    noTone(BUZZER);
+    apagarLedsBotoes();
+  }
+}
 
