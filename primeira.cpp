@@ -82,3 +82,42 @@ void setup() {
   
   menuSelecaoMusica();
 }
+
+void loop() {
+}
+
+void tocarMusicaCompleta() {
+  emJogo = true;
+  for(int i = 0; i < musicas[musicaSelecionada].tamanho; i++) {
+    int nota = musicas[musicaSelecionada].notas[i];
+    int duracao = 1500 / musicas[musicaSelecionada].duracoes[i];
+    
+    acenderLedDaNota(nota);
+    tone(BUZZER, nota, duracao);
+
+    int pausa = duracao * 1.3;
+    delay(pausa);
+    
+    noTone(BUZZER);
+    apagarLedsBotoes();
+
+    delay(duracao * 0.2);
+  }
+  emJogo = false;
+}
+
+void acenderLedDaNota(int nota) {
+  if(nota == NOTA_E4) {
+    digitalWrite(LED_BOTAO1, HIGH); 
+  } 
+  else if(nota == NOTA_A4) {
+    digitalWrite(LED_BOTAO2, HIGH); 
+  }
+  else if(nota == NOTA_Cs5) {
+    digitalWrite(LED_VERMELHO, HIGH); 
+  }
+  else if(nota == NOTA_E5) {
+    digitalWrite(LED_VERDE, HIGH);
+  }
+}
+
