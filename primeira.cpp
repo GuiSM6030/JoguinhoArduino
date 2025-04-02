@@ -4,6 +4,8 @@
 #define BUZZER 8
 #define LED_VERDE 6
 #define LED_VERMELHO 7
+#define LED_BOTAO1 A1
+#define LED_BOTAO2 A2
 
 // Botões com pull-up interno
 #define BOTAO1 2
