@@ -275,3 +275,12 @@ bool verificarResposta(int tamanho) {
   return true;
 }
 
+void piscarLed(int led, int vezes) {
+  for(int i = 0; i < vezes; i++) {
+    digitalWrite(led, HIGH);
+    delay(200);
+    digitalWrite(led, LOW);
+    delay(200);
+  }
+}
+
