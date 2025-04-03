@@ -18,30 +18,30 @@
 LiquidCrystal lcd(9, 11, 10, 12, 13, A0);
 
 // Notas 
-#define NOTA_E4  330  // Mi (Botão 1 - Verde)
-#define NOTA_A4  440  // Lá (Botão 2 - Vermelho)
-#define NOTA_Cs5 554  // Dó# (Botão 3 - Amarelo)
-#define NOTA_E5  659  // Mi (Botão 4 - Azul)
+#define NOTA_DO  330  // (Botão 1 - Verde)
+#define NOTA_RE  440  // (Botão 2 - Vermelho)
+#define NOTA_MI 554  //  (Botão 3 - Amarelo)
+#define NOTA_FA  659  // (Botão 4 - Azul)
 
 // sequências das músicas
 // Musica 1
-int musica1[] = {NOTA_E4, NOTA_A4, NOTA_Cs5, NOTA_E5, NOTA_A4, NOTA_E4};
+int musica1[] = {NOTA_DO, NOTA_RE, NOTA_MI, NOTA_FA, NOTA_FA, NOTA_FA};
 int musica1Durations[] = {4, 4, 2, 4, 4, 2};
 
 // Musica 2 
-int musica2[] = {NOTA_E4, NOTA_E4, NOTA_E4, NOTA_A4, NOTA_Cs5, NOTA_Cs5, NOTA_Cs5, NOTA_A4};
+int musica2[] = {NOTA_DO, NOTA_DO, NOTA_MI, NOTA_FA, NOTA_RE, NOTA_DO, NOTA_RE, NOTA_MI};
 int musica2Durations[] = {4, 4, 4, 4, 4, 4, 4, 4};
 
 // musica 3 
-int musica3[] = {NOTA_E4, NOTA_A4, NOTA_Cs5, NOTA_Cs5, NOTA_E5, NOTA_E4};
-int musica3Durations[] = {4, 4, 4, 4, 2, 2};
+int musica3[] = {NOTA_DO, NOTA_RE, NOTA_MI, NOTA_DO, NOTA_RE, NOTA_MI};
+int musica3Durations[] = {2, 2, 8, 2, 2, 8};
 
 // musica 4 
-int musica4[] = {NOTA_E4, NOTA_E4, NOTA_A4, NOTA_E4, NOTA_Cs5, NOTA_A4, NOTA_E4, NOTA_E4, NOTA_A4, NOTA_E4, NOTA_E5, NOTA_Cs5};
+int musica4[] = {NOTA_DO, NOTA_DO, NOTA_RE, NOTA_MI, NOTA_FA, NOTA_DO, NOTA_DO, NOTA_DO, NOTA_RE, NOTA_MI, NOTA_FA, NOTA_DO};
 int musica4Durations[] = {4, 8, 4, 4, 4, 2, 4, 8, 4, 4, 4, 2};
 
 // musica 5 
-int musica5[] = {NOTA_E4, NOTA_A4, NOTA_E4, NOTA_Cs5, NOTA_E5, NOTA_Cs5, NOTA_A4, NOTA_A4, NOTA_E4, NOTA_E4, NOTA_A4, NOTA_E4};
+int musica5[] = {NOTA_DO, NOTA_RE, NOTA_MI, NOTA_MI, NOTA_FA, NOTA_DO, NOTA_DO, NOTA_FA, NOTA_RE, NOTA_DO, NOTA_RE, NOTA_MI};
 int musica5Durations[] = {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4};
 
 struct Musica {
@@ -124,16 +124,16 @@ void tocarMusicaCompleta() {
 }
 
 void acenderLedDaNota(int nota) {
-  if(nota == NOTA_E4) {
+  if(nota == NOTA_DO) {
     digitalWrite(LED_BOTAO1, HIGH);
   } 
-  else if(nota == NOTA_A4) {
+  else if(nota == NOTA_RE) {
     digitalWrite(LED_BOTAO2, HIGH);
   }
-  else if(nota == NOTA_Cs5) {
+  else if(nota == NOTA_MI) {
     digitalWrite(LED_VERMELHO, HIGH);
   }
-  else if(nota == NOTA_E5) {
+  else if(nota == NOTA_FA) {
     digitalWrite(LED_VERDE, HIGH);
   }
 }
@@ -296,10 +296,10 @@ bool verificarResposta(int tamanho) {
     
     int nota;
     switch(botaoPressionado) {
-      case 0: nota = NOTA_E4; break;
-      case 1: nota = NOTA_A4; break;
-      case 2: nota = NOTA_Cs5; break;
-      case 3: nota = NOTA_E5; break;
+      case 0: nota = NOTA_DO; break;
+      case 1: nota = NOTA_RE; break;
+      case 2: nota = NOTA_MI; break;
+      case 3: nota = NOTA_FA; break;
     }
     
     int duracao = 200;
