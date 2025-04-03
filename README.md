@@ -2,7 +2,7 @@
 PROJETO EM C++, FEI, Noturno
 
 # Projeto no TinkerCad
-https://www.tinkercad.com/things/eyncHt5v4gf-projeto?sharecode=Lg4YuK6g56w4HUB9LW8Ke4b5_UBq8eg5Rpgb4Bd85tg
+https://www.tinkercad.com/things/9ipB2f7BBQC/editel?sharecode=4xz41tT6bQMMyvAk11dNIzxQTfjn3qpCCXOe9BywcH0
 
 # Componentes utilizados
 - Arduíno;
