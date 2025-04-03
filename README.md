@@ -4,6 +4,10 @@ PROJETO EM C++, FEI, Noturno
 # Projeto no TinkerCad
 https://www.tinkercad.com/things/9ipB2f7BBQC/editel?sharecode=4xz41tT6bQMMyvAk11dNIzxQTfjn3qpCCXOe9BywcH0
 
+
+![Copy of Projeto_Teste](https://github.com/user-attachments/assets/d50f543e-c7e6-42ed-b01d-052c41c4ae0b)
+
+
 # Componentes utilizados
 - Arduíno;
 - Botão 4x;
