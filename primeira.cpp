@@ -1,11 +1,15 @@
 #include <LiquidCrystal.h>
 
+// Definição dos pinos
 #define BUZZER 8
 #define LED_VERDE 6
 #define LED_VERMELHO 7
+
+// Novos LEDs para os botões
 #define LED_BOTAO1 A1
 #define LED_BOTAO2 A2
 
+// Botões com pull-up interno
 #define BOTAO1 2
 #define BOTAO2 3
 #define BOTAO3 4
@@ -13,25 +17,32 @@
 
 LiquidCrystal lcd(9, 11, 10, 12, 13, A0);
 
+// Notas 
 #define NOTA_E4  330  // Mi (Botão 1 - Verde)
 #define NOTA_A4  440  // Lá (Botão 2 - Vermelho)
 #define NOTA_Cs5 554  // Dó# (Botão 3 - Amarelo)
 #define NOTA_E5  659  // Mi (Botão 4 - Azul)
 
-int jingleBell[] = {NOTA_E4, NOTA_A4, NOTA_Cs5, NOTA_E5, NOTA_A4, NOTA_E4};
-int jingleDurations[] = {4, 4, 2, 4, 4, 2};
+// sequências das músicas
+// Musica 1
+int musica1[] = {NOTA_E4, NOTA_A4, NOTA_Cs5, NOTA_E5, NOTA_A4, NOTA_E4};
+int musica1Durations[] = {4, 4, 2, 4, 4, 2};
 
-int funkyTown[] = {NOTA_E4, NOTA_E4, NOTA_E4, NOTA_A4, NOTA_Cs5, NOTA_Cs5, NOTA_Cs5, NOTA_A4};
-int funkyDurations[] = {4, 4, 4, 4, 4, 4, 4, 4};
+// Musica 2 
+int musica2[] = {NOTA_E4, NOTA_E4, NOTA_E4, NOTA_A4, NOTA_Cs5, NOTA_Cs5, NOTA_Cs5, NOTA_A4};
+int musica2Durations[] = {4, 4, 4, 4, 4, 4, 4, 4};
 
-int gonnaFlyNow[] = {NOTA_E4, NOTA_A4, NOTA_Cs5, NOTA_Cs5, NOTA_E5, NOTA_E4};
-int gonnaFlyDurations[] = {4, 4, 4, 4, 2, 2};
+// musica 3 
+int musica3[] = {NOTA_E4, NOTA_A4, NOTA_Cs5, NOTA_Cs5, NOTA_E5, NOTA_E4};
+int musica3Durations[] = {4, 4, 4, 4, 2, 2};
 
-int happyBirthday[] = {NOTA_E4, NOTA_E4, NOTA_A4, NOTA_E4, NOTA_Cs5, NOTA_A4, NOTA_E4, NOTA_E4, NOTA_A4, NOTA_E4, NOTA_E5, NOTA_Cs5};
-int happyBirthdayDurations[] = {4, 8, 4, 4, 4, 2, 4, 8, 4, 4, 4, 2};
+// musica 4 
+int musica4[] = {NOTA_E4, NOTA_E4, NOTA_A4, NOTA_E4, NOTA_Cs5, NOTA_A4, NOTA_E4, NOTA_E4, NOTA_A4, NOTA_E4, NOTA_E5, NOTA_Cs5};
+int musica4Durations[] = {4, 8, 4, 4, 4, 2, 4, 8, 4, 4, 4, 2};
 
-int myGirl[] = {NOTA_E4, NOTA_A4, NOTA_E4, NOTA_Cs5, NOTA_E5, NOTA_Cs5, NOTA_A4, NOTA_A4, NOTA_E4, NOTA_E4, NOTA_A4, NOTA_E4};
-int myGirlDurations[] = {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4};
+// musica 5 
+int musica5[] = {NOTA_E4, NOTA_A4, NOTA_E4, NOTA_Cs5, NOTA_E5, NOTA_Cs5, NOTA_A4, NOTA_A4, NOTA_E4, NOTA_E4, NOTA_A4, NOTA_E4};
+int musica5Durations[] = {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4};
 
 struct Musica {
   const char* nome;
@@ -42,16 +53,17 @@ struct Musica {
 };
 
 Musica musicas[] = {
-  {"Jingle Bell", jingleBell, jingleDurations, sizeof(jingleBell)/sizeof(int), 5},
-  {"Funky Town", funkyTown, funkyDurations, sizeof(funkyTown)/sizeof(int), 4},
-  {"Rocky Theme", gonnaFlyNow, gonnaFlyDurations, sizeof(gonnaFlyNow)/sizeof(int), 4},
-  {"Happy Birthday", happyBirthday, happyBirthdayDurations, sizeof(happyBirthday)/sizeof(int), 5},
-  {"My Girl", myGirl, myGirlDurations, sizeof(myGirl)/sizeof(int), 4}
+  {"Musica 1", musica1, musica1Durations, sizeof(musica1)/sizeof(int), 5},
+  {"Musica 2", musica2, musica2Durations, sizeof(musica2)/sizeof(int), 4},
+  {"Musica 3", musica3, musica3Durations, sizeof(musica3)/sizeof(int), 4},
+  {"Musica 4", musica4, musica4Durations, sizeof(musica4)/sizeof(int), 5},
+  {"Musica 5", musica5, musica5Durations, sizeof(musica5)/sizeof(int), 4}
 };
 
 const int NUM_MUSICAS = sizeof(musicas)/sizeof(Musica);
 int musicaSelecionada = 0;
 int nivelAtual = 1;
+int vidas = 3;  // Sistema de vidas adicionado
 int sequencia[12]; 
 int indiceSequencia = 0;
 bool emJogo = false;
@@ -71,11 +83,13 @@ void setup() {
   
   lcd.begin(16, 2);
   randomSeed(analogRead(A3));
- 
+  
+  // Mensagem inicial
   lcd.print("Pressione um");
   lcd.setCursor(0, 1);
   lcd.print("botao p/ comecar");
   
+  // Espera qualquer botão ser pressionado
   while(digitalRead(BOTAO1) && digitalRead(BOTAO2) && digitalRead(BOTAO3) && digitalRead(BOTAO4)) {
     delay(100);
   }
@@ -84,6 +98,7 @@ void setup() {
 }
 
 void loop() {
+  // O loop principal é controlado pelas funções chamadas no setup
 }
 
 void tocarMusicaCompleta() {
@@ -94,13 +109,15 @@ void tocarMusicaCompleta() {
     
     acenderLedDaNota(nota);
     tone(BUZZER, nota, duracao);
-
+    
+    // Pausa proporcional à duração da nota
     int pausa = duracao * 1.3;
     delay(pausa);
     
     noTone(BUZZER);
     apagarLedsBotoes();
-
+    
+    // Pequena pausa entre notas
     delay(duracao * 0.2);
   }
   emJogo = false;
@@ -108,13 +125,13 @@ void tocarMusicaCompleta() {
 
 void acenderLedDaNota(int nota) {
   if(nota == NOTA_E4) {
-    digitalWrite(LED_BOTAO1, HIGH); 
+    digitalWrite(LED_BOTAO1, HIGH);
   } 
   else if(nota == NOTA_A4) {
-    digitalWrite(LED_BOTAO2, HIGH); 
+    digitalWrite(LED_BOTAO2, HIGH);
   }
   else if(nota == NOTA_Cs5) {
-    digitalWrite(LED_VERMELHO, HIGH); 
+    digitalWrite(LED_VERMELHO, HIGH);
   }
   else if(nota == NOTA_E5) {
     digitalWrite(LED_VERDE, HIGH);
@@ -130,6 +147,7 @@ void apagarLedsBotoes() {
 
 void menuSelecaoMusica() {
   emJogo = false;
+  vidas = 3; // Reset de vidas ao voltar ao menu
   while(true) {
     lcd.clear();
     lcd.print("Escolha a musica:");
@@ -159,33 +177,53 @@ void menuSelecaoMusica() {
     }
   }
 }
+
 void iniciarJogo() {
   nivelAtual = 1;
   emJogo = true;
-
+  
+  // Gera a sequência completa uma vez no início
   for(int i = 0; i < musicas[musicaSelecionada].tamanho; i++) {
-    sequencia[i] = i; 
+    sequencia[i] = i; // Usa todas as notas em ordem
   }
   
-  while(nivelAtual <= musicas[musicaSelecionada].niveis) {
+  while(nivelAtual <= musicas[musicaSelecionada].niveis && vidas > 0) {
     lcd.clear();
     lcd.print("Nivel ");
     lcd.print(nivelAtual);
     lcd.print("/");
     lcd.print(musicas[musicaSelecionada].niveis);
     lcd.setCursor(0, 1);
-    lcd.print("Prestem atencao!");
+    lcd.print("Vidas: ");
+    lcd.print(vidas);
     delay(1000);
-
+    
+    // Toca a sequência até o nível atual
     tocarSequencia(nivelAtual);
-
+    
+    // Espera a resposta do jogador
     if(!verificarResposta(nivelAtual)) {
+      vidas--; // Perde uma vida
       lcd.clear();
-      lcd.print("Voce errou!");
+      lcd.print("Errou! Vidas: ");
+      lcd.print(vidas);
       piscarLed(LED_VERMELHO, 3);
-      delay(1000);
-      menuSelecaoMusica();
-      return;
+      
+      if(vidas > 0) {
+        // Ainda tem vidas, reinicia o nível
+        nivelAtual = 1;
+        delay(1000);
+        continue;
+      } else {
+        // Sem vidas, volta para o menu
+        lcd.clear();
+        lcd.print("Game Over!");
+        lcd.setCursor(0, 1);
+        lcd.print("Voltando ao menu");
+        delay(2000);
+        menuSelecaoMusica();
+        return;
+      }
     }
     
     lcd.clear();
@@ -195,16 +233,22 @@ void iniciarJogo() {
     delay(1000);
   }
   
-  lcd.clear();
-  lcd.print("Parabens, voce");
-  lcd.setCursor(0, 1);
-  lcd.print("venceu!");
-  piscarLed(LED_VERDE, 5);
-  delay(3000);
+  if(vidas > 0) {
+    lcd.clear();
+    lcd.print("Parabens, voce");
+    lcd.setCursor(0, 1);
+    lcd.print("venceu!");
+    piscarLed(LED_VERDE, 5);
+    delay(3000);
+  }
   menuSelecaoMusica();
 }
 
 void tocarSequencia(int tamanho) {
+  lcd.clear();
+  lcd.print("Prestem atencao!");
+  delay(500);
+  
   for(int i = 0; i < tamanho; i++) {
     int notaIndex = sequencia[i];
     int nota = musicas[musicaSelecionada].notas[notaIndex];
@@ -217,6 +261,7 @@ void tocarSequencia(int tamanho) {
     apagarLedsBotoes();
   }
 }
+
 bool verificarResposta(int tamanho) {
   lcd.clear();
   lcd.print("Repita a");
@@ -283,4 +328,3 @@ void piscarLed(int led, int vezes) {
     delay(200);
   }
 }
-
